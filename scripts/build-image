@@ -1,0 +1,14 @@
+#!/bin/bash
+
+REPOSITORY=landing_pages/client_web
+CURRENT_GIT_COMMIT=$(git rev-parse --short=12 HEAD)
+
+if [[ ! -z "$(docker images -q landing_pages/client_web:latest)" ]]; then
+  LATEST_IMAGE_COMMIT=$(docker inspect $REPOSITORY:latest -f '{{ .Config.Labels.commit }}')
+  docker image tag $REPOSITORY:latest $REPOSITORY:$LATEST_IMAGE_COMMIT
+fi
+
+docker build . \
+  -f .docker/Dockerfile \
+  -t landing_pages/client_web:latest \
+  --label "commit=$CURRENT_GIT_COMMIT"

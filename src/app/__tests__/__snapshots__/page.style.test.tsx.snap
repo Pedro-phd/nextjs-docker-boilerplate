@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Home page styles test should render \`Image\` as expected: Home - \`Image\` styled component 1`] = `
+<img
+  alt=""
+  className="sc-hIFLYB"
+  data-nimg="1"
+  decoding="async"
+  onError={[Function]}
+  onLoad={[Function]}
+  src=""
+  style={
+    {
+      "color": "transparent",
+    }
+  }
+/>
+`;
+
+exports[`Home page styles test should render \`Main\` as expected: Home - \`Main\` styled component 1`] = `
+<main
+  className="sc-eLqIir gKSacg"
+/>
+`;
+
+exports[`Home page styles test should render \`Wrapper\` as expected: Home - \`Wrapper\` styled component 1`] = `
+<div
+  className="sc-HzRMQ"
+/>
+`;

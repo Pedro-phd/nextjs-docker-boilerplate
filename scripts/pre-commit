@@ -1,0 +1,20 @@
+#!/bin/bash
+LC_ALL=C
+
+if [ -z "$BRANCHES_TO_SKIP" ]; then
+  BRANCHES_TO_SKIP=(main develop staging test)
+fi
+
+BRANCH_NAME=$(git symbolic-ref --short HEAD)
+BRANCH_EXCLUDED=$(printf "%s\n" "${BRANCHES_TO_SKIP[@]}" | grep -c "^$BRANCH_NAME$")
+
+BRANCH_REGEX="^feat\/[a-zA-Z0-9]+[a-zA-Z0-9_\-\/]+|task\/[a-zA-Z0-9]+[a-zA-Z0-9_\-\/]+|hotfix\/[a-zA-Z0-9_\-\/]+|fix\/[a-zA-Z0-9_\-\/]+|chore\/[a-zA-Z0-9_\-\/]+|test\/[a-zA-Z0-9_\-\/]+|style\/[a-zA-Z0-9_\-\/]+|refactor\/[a-zA-Z0-9_\-\/]+$"
+
+if [ -n "$BRANCH_NAME" ] && ! [[ $BRANCH_EXCLUDED -eq 1 ]]; then
+  if [[ ! $BRANCH_NAME =~ $BRANCH_REGEX ]]; then
+    echo "Branch name not allowed. Please use one of the following patterns: feat/###/description, task/###/description, fix/###/description, hotfix/description, chore/###/description, test/###/description, style/description, refactor/description. Or commit with -n to ignore"
+    exit 1
+  fi
+fi
+
+exit 0

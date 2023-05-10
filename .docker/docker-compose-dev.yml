@@ -1,0 +1,11 @@
+version: '3.7'
+services:
+  lp_client_web:
+    working_dir: /usr/src/app
+    image: node:18.12.1
+    volumes: 
+      - ../:/usr/src/app/
+      - ../src/:/usr/src/app/src
+    command: ["npm", "run", "dev"]
+    ports:
+      - "3000:3000"
